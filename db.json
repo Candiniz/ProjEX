@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "id": "47fc",
+      "name": "Projeto de Decoração",
+      "budget": "10",
+      "category": {
+        "id": "1",
+        "name": "Infra"
+      },
+      "cost": 7,
+      "services": [
+        {
+          "name": "Projeto de Decoração",
+          "cost": "1",
+          "description": "124",
+          "id": "fc9ff74c-1fb3-4179-9519-5b28c57fe290"
+        },
+        {
+          "name": "Teste 1",
+          "description": "151251",
+          "cost": "5",
+          "id": "e4cd2756-7190-4ff2-92dd-a4a794b81a1b"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Infra"
+    },
+    {
+      "id": "2",
+      "name": "Desenvolvimento"
+    },
+    {
+      "id": "3",
+      "name": "Design"
+    },
+    {
+      "id": "4",
+      "name": "Planejamento"
+    }
+  ]
+}
