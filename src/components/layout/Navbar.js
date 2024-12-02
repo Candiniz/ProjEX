@@ -1,38 +1,20 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./Navbar.module.css";
 import logo from "../../img/projex_logo.png";
-
 import { Link } from "react-router-dom";
 import Container from "./Container";
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
-    const menuRef = useRef(null);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
 
-    const handleClickOutside = (e) => {
-        if (menuRef.current && !menuRef.current.contains(e.target)) {
-            // Se o clique for fora do menu, fecha o menu
-            setMenuOpen(false);
-        }
+    const handleMenuClick = (e) => {
+        // Impede o fechamento do menu quando clicado dentro dele
+        e.preventDefault();
     };
-
-    useEffect(() => {
-        // Adiciona o event listener quando o menu estiver aberto
-        if (menuOpen) {
-            document.addEventListener("mousedown", handleClickOutside);
-        } else {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-
-        // Limpa o listener ao desmontar o componente
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [menuOpen]); // Vai rodar sempre que o menuOpen mudar
 
     return (
         <nav className={styles.navbar}>
@@ -48,19 +30,33 @@ function Navbar() {
                     <div></div>
                 </div>
 
+                {/* Div com o fundo blur */}
+                {menuOpen && (
+                    <div className={styles.blurOverlay} onClick={toggleMenu}></div>
+                )}
+
                 {/* Menu deslizante */}
                 <div
-                    ref={menuRef}
-                    className={`${styles.menu} ${menuOpen ? styles.active : ""}`
-                    }>
+                    className={`${styles.menu} ${menuOpen ? styles.active : ""}`}
+                    onClick={handleMenuClick} // Impede o fechamento ao clicar dentro do menu
+                >
                     <ul className={styles.listMenu}>
-                        <li className={styles.itemMenu}><Link to="/projects" onClick={toggleMenu}>Projetos</Link></li>
-                        <li className={styles.itemMenu}><Link to="/contact" onClick={toggleMenu}>Contato</Link></li>
-                        <li className={styles.itemMenu}><Link to="/company" onClick={toggleMenu}>Empresa</Link></li>
-                        <li className={styles.itemMenu}><Link to="/newproject" onClick={toggleMenu}>Novo Projeto</Link></li>
+                        <li className={styles.itemMenu}>
+                            <Link to="/projects" onClick={toggleMenu}>Projetos</Link>
+                        </li>
+                        <li className={styles.itemMenu}>
+                            <Link to="/contact" onClick={toggleMenu}>Contato</Link>
+                        </li>
+                        <li className={styles.itemMenu}>
+                            <Link to="/company" onClick={toggleMenu}>Empresa</Link>
+                        </li>
+                        <li className={styles.itemMenu}>
+                            <Link to="/newproject" onClick={toggleMenu}>Novo Projeto</Link>
+                        </li>
                     </ul>
                 </div>
 
+                {/* Menu para telas grandes */}
                 <ul className={styles.list}>
                     <li className={styles.item}><Link to="/projects" onClick={toggleMenu}>Projetos</Link></li>
                     <li className={styles.item}><Link to="/contact" onClick={toggleMenu}>Contato</Link></li>

@@ -53,6 +53,29 @@
     transition: 0.3s;
 }
 
+.blurOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Um fundo escuro semi-transparente */
+    backdrop-filter: blur(5px);
+    z-index: 50; /* O blur fica atrás do menu, mas na frente de outros elementos */
+    animation: blurFade 0.5s ease-in-out ;
+
+}
+
+@keyframes blurFade {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+    
+}
+
 /* Menu deslizante */
 .menu {
     position: fixed;

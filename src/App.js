@@ -15,7 +15,6 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Container customClass="min-height">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
@@ -24,7 +23,6 @@ function App() {
           <Route path="/newproject" element={<NewProject />} />
           <Route path="/project/:id" element={<Project />} />
         </Routes>
-      </Container>
       <Footer />
     </BrowserRouter>
   );
