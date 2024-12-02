@@ -1,10 +1,8 @@
 .btn {
-    position: absolute;
-    bottom: 100px;
-    right: 40px;
+    width: 230px;
+    margin: auto;
+    margin-top: 10px;
 
-    padding-left: 50px;
-    padding-right: 50px;
     padding-top: 10px;
     padding-bottom: 10px;
 
@@ -13,17 +11,11 @@
     color: #FFF;
     white-space: nowrap;
 
+
     text-decoration: none;
     transition: 0.5s;
 }
 
-@media (min-width: 992px) {
-    .btn{
-        bottom: calc(450px - 5vw);
-        right: 130px;
-        transform: translateX(0%);
-    }
-}
 
 .btn:hover {
     color: #ffbb33;

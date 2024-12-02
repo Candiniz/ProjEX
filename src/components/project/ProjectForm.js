@@ -25,10 +25,13 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
     }, [])
 
     const submit = (e) => {
-        e.preventDefault()
-        //console.log(project)
-        handleSubmit(project)
-    }
+        e.preventDefault();
+        if (!project.name || !project.budget || !project.category || !project.category.id) {
+            alert('Por favor, preencha todos os campos e selecione uma categoria.');
+            return;
+        }
+        handleSubmit(project);
+    };
 
     function handleChange(e) {
         setProject({ ...project, [e.target.name]: e.target.value })

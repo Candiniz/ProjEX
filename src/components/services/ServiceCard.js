@@ -4,7 +4,7 @@ import styles from '../project/ProjectCard.module.css'
 
 
 
-function ServiceCard({id, name, cost, description, handleRemove}) {
+function ServiceCard({ id, name, cost, description, handleRemove }) {
 
     const remove = (e) => {
         e.preventDefault()
@@ -17,7 +17,10 @@ function ServiceCard({id, name, cost, description, handleRemove}) {
             <p><span>Custo total:</span> R$ {cost}</p>
             <p>{description}</p>
             <div className={styles.project_card_actions}>
-                <button onClick={remove}><BsFillTrashFill /> Excluir</button>
+                <button onClick={remove}>
+                    <BsFillTrashFill />
+                    <span>Excluir</span>
+                </button>
             </div>
         </div>
     )

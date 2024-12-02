@@ -1,10 +1,11 @@
-import { parse, v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 import styles from './Project.module.css'
 
+import Cog from '../layout/Cog'
 import Loading from '../layout/Loading'
 import Container from '../layout/Container'
 import ProjectForm from '../project/ProjectForm'
@@ -136,9 +137,11 @@ function Project() {
 
   return (
     <>
+      <Cog />
       {project.name ? (
         <div className={styles.project_details}>
-          <Container customClass="column">
+          
+
             {message && <Message type={type} msg={message} />}
             <div className={styles.details_container}>
               <h1>Projeto: {project.name}</h1>
@@ -197,7 +200,7 @@ function Project() {
                 ))}
               {services.length === 0 && <p>Não há serviços cadastrados.</p>}
             </Container>
-          </Container>
+
         </div>
       ) : (
         <Loading />

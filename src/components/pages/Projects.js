@@ -11,6 +11,9 @@ import styles from './Projects.module.css'
 function Projects() {
     const [projects, setProjects] = useState([])
     const [removeLoading, setRemoveLoading] = useState(false)
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [projectToDelete, setProjectToDelete] = useState(null);
+
     const navigate = useNavigate();
 
     const location = useLocation()
@@ -19,6 +22,7 @@ function Projects() {
         message = location.state.message
     }
 
+    
     useEffect(() => {
         setTimeout(() => {
             fetch('http://localhost:5000/projects', {
@@ -36,20 +40,29 @@ function Projects() {
     }, [])
 
     function removeProject(id) {
-
-        fetch(`http://localhost:5000/projects/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-type': 'application/json'
-            },
-        }).then(resp => resp.json())
-            .then(data => {
-                setProjects(projects.filter((project) => project.id !== id))
-                navigate('/projects', { state: { message: 'Projeto excluído com sucesso!' } });
-
-            })
-            .catch(err => console.log(err))
+        // Exibe um popup de confirmação
+        const confirmDelete = window.confirm('Tem certeza que deseja excluir este projeto?');
+    
+        if (confirmDelete) {
+            // Se o usuário confirmar, faz a requisição de exclusão
+            fetch(`http://localhost:5000/projects/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+            }).then(resp => resp.json())
+                .then(data => {
+                    setProjects(projects.filter((project) => project.id !== id))
+                    navigate('/projects', { state: { message: 'Projeto excluído com sucesso!' } });
+                })
+                .catch(err => console.log(err))
+        } else {
+            // Se o usuário cancelar, não faz nada
+            console.log("Exclusão do projeto cancelada");
+        }
     }
+
+    
 
     return (
 

@@ -58,10 +58,10 @@ function Navbar() {
 
                 {/* Menu para telas grandes */}
                 <ul className={styles.list}>
-                    <li className={styles.item}><Link to="/projects" onClick={toggleMenu}>Projetos</Link></li>
-                    <li className={styles.item}><Link to="/contact" onClick={toggleMenu}>Contato</Link></li>
-                    <li className={styles.item}><Link to="/company" onClick={toggleMenu}>Empresa</Link></li>
-                    <li className={styles.item}><Link to="/newproject" onClick={toggleMenu}>Novo Projeto</Link></li>
+                    <li className={styles.item}><Link to="/projects">Projetos</Link></li>
+                    <li className={styles.item}><Link to="/contact">Contato</Link></li>
+                    <li className={styles.item}><Link to="/company">Empresa</Link></li>
+                    <li className={styles.item}><Link to="/newproject">Novo Projeto</Link></li>
                 </ul>
             </Container>
         </nav>

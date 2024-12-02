@@ -1,4 +1,9 @@
 .form {
     width: 100%;
     margin: 2em 0;
+
+}
+
+.form input {
+    border-radius: 5px;
 }
