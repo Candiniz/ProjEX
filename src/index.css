@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Roboto Mono", serif;
 }
 
 html, body, #root {
-  background-color: #efefef;
-  height: 100%;
+  background: radial-gradient(circle, #be9362, #4d3110);
+  height: 100vh; 
+  
 }
+

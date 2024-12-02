@@ -1,8 +1,20 @@
 .footer {
-    background-color: #222;
+    position: fixed; /* Fixa o footer na tela */
+    bottom: 0; /* Coloca o footer no fundo */
+    left: 0;
+    width: 100%; /* Garante que o footer ocupe toda a largura da tela */
+    background-color: #000;
     color: #FFF;
-    padding: 3em;
+    padding: 1em;
     text-align: center;
+    z-index: 1000; /* Garantir que o footer fique sobre o conteúdo */
+}
+
+.footer_inside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .social_list {
@@ -19,9 +31,7 @@
     color: #ffbb33;
 }
 
-.copyright {
-    margin-top: 2em;
-}
+
 
 .copyright span {
     font-weight: bold;

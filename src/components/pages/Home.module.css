@@ -1,30 +1,98 @@
 .home_container {
-    width: 100%;
-    display: flex;
+    width: 100vw;
+    display: relative;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 4em;
 }
 
-.home_container h1 {
-    font-size: 2.5em;
-    margin-bottom: .5em;
+.home_container_img {
+    width: 150px;
+    position: absolute;
+    inset: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50px;
+    z-index: 20;
 }
 
-.home_container span {
-    color: #ffbb33;
-    padding: 0 .2em;
-    background-color: #222;
+@media (min-width: 992px) {
+    .home_container_img {
+        width: 250px;
+        position: absolute;
+        inset: 0;
+        top: -50px;
+        margin: auto;
+        z-index: 20;
+    }
 }
 
-.home_container p {
-    margin-bottom: 1.5em;
-    color: #7b7b7b;
-}
-
-.home_container img {
+/* Estilos base (Mobile First) */
+.home_container_logo {
     width: 350px;
-    margin: 2em 0;
+    position: absolute;
+    bottom: 190px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
+/* Small devices (sm - min-width: 576px) */
+@media (min-width: 576px) {
+    .home_container_logo {
+        width: 350px;
+        position: absolute;
+        bottom: 190px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+
+/* Large devices (lg - min-width: 992px) */
+@media (min-width: 992px) {
+    .home_container_logo {
+        width: 40vw;
+        position: absolute;
+        left: 50px;
+        top: 200px;
+        transform: translateX(0);
+    }
+}
+
+/* Extra large devices (xl - min-width: 1200px) */
+@media (min-width: 1200px) {
+    .home_container_logo {
+        width: 40vw;
+        position: absolute;
+        left: 50px;
+        top: 200px;
+    }
+}
+
+.p {
+    white-space: nowrap;
+    color: #ffffff;
+    position: absolute;
+    bottom: 160px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: small;
+}
+
+
+@media (min-width: 992px) {
+    .p {
+        font-size: medium;
+        bottom: calc(510px - 5vw);
+        right: calc(10px + 5vw);
+        transform: translateX(0);
+    }
+}
+
+@media (min-width: 1200px) {
+    .p {
+        font-size: large;
+        bottom: calc(510px - 5vw);
+        transform: translateX(0);
+    }
+}

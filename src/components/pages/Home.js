@@ -1,14 +1,15 @@
 import styles from './Home.module.css'
-import savings from '../../img/savings.svg'
 import LinkButton from '../layout/LinkButton';
+import lamp from '../../img/lamp.png'
+import logo from '../../img/logo2.png'
 
 function Home() {
     return (
         <section className={styles.home_container}>
-            <h1>Bem vindo ao <span>Costs</span></h1>
-            <p>Começe a gerenciar seus projetos agora mesmo!</p>
+            <img className={styles.home_container_img} alt='Lamp' src={lamp} />
+            <img className={styles.home_container_logo} alt='ProjEX Logo' src={logo} />
+            <p className={styles.p}>Começe agora a gerenciar seus projetos!</p>
             <LinkButton to="/newproject" text="Criar Projeto" />
-            <img src={savings} alt='Costs' />
         </section>
     )
 }
