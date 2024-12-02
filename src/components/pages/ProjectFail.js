@@ -26,7 +26,7 @@ function Project() {
 
     useEffect(() => {
         setTimeout(() => {
-            fetch(`http://localhost:5000/projects/${id}`, {
+            fetch(`https://projex-backend.onrender.com/projects/${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json', // Corrigi o Content-Type
@@ -56,7 +56,7 @@ function Project() {
         projectUpdated.services = servicesUpdated
         projectUpdated.cost = parseFloat(projectUpdated.cost) - parseFloat(cost)
 
-        fetch(`http://localhost:5000/projects/${projectUpdated.id}`, {
+        fetch(`https://projex-backend.onrender.com/projects/${projectUpdated.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type':'application/json'
@@ -80,7 +80,7 @@ function Project() {
             return false
         }
 
-        fetch(`http://localhost:5000/projects/${id}`, {
+        fetch(`https://projex-backend.onrender.com/projects/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type':'application/json',
@@ -124,7 +124,7 @@ function Project() {
         project.cost = newCost
         
         //update project
-        fetch(`http://localhost:5000/projects/${id}`, {
+        fetch(`https://projex-backend.onrender.com/projects/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type':'application/json'

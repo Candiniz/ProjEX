@@ -26,7 +26,7 @@ function Project() {
     // Para ver o loading
     setTimeout(
       () =>
-        fetch(`http://localhost:5000/projects/${id}`, {
+        fetch(`https://projex-backend.onrender.com/projects/${id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ function Project() {
       return false
     }
 
-    fetch(`http://localhost:5000/projects/${project.id}`, {
+    fetch(`https://projex-backend.onrender.com/projects/${project.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ function Project() {
     // add service cost to project cost total
     project.cost = newCost
 
-    fetch(`http://localhost:5000/projects/${project.id}`, {
+    fetch(`https://projex-backend.onrender.com/projects/${project.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ function Project() {
     projectUpdated.services = servicesUpdated
     projectUpdated.cost = parseFloat(projectUpdated.cost) - parseFloat(cost)
 
-    fetch(`http://localhost:5000/projects/${projectUpdated.id}`, {
+    fetch(`https://projex-backend.onrender.com/projects/${projectUpdated.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

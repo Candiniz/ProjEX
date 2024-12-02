@@ -11,8 +11,7 @@ import styles from './Projects.module.css'
 function Projects() {
     const [projects, setProjects] = useState([])
     const [removeLoading, setRemoveLoading] = useState(false)
-    const [showConfirmModal, setShowConfirmModal] = useState(false);
-    const [projectToDelete, setProjectToDelete] = useState(null);
+
 
     const navigate = useNavigate();
 
@@ -25,7 +24,7 @@ function Projects() {
     
     useEffect(() => {
         setTimeout(() => {
-            fetch('http://localhost:5000/projects', {
+            fetch('https://projex-backend.onrender.com/projects', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,7 +44,7 @@ function Projects() {
     
         if (confirmDelete) {
             // Se o usuário confirmar, faz a requisição de exclusão
-            fetch(`http://localhost:5000/projects/${id}`, {
+            fetch(`https://projex-backend.onrender.com/projects/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-type': 'application/json'
