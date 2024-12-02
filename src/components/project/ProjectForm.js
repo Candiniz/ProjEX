@@ -34,14 +34,20 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
     };
 
     function handleChange(e) {
-        setProject({ ...project, [e.target.name]: e.target.value })
+        setProject(prevProject => ({ 
+            ...prevProject, 
+            [e.target.name]: e.target.value 
+        }));
     }
-
+    
     function handleCategory(e) {
-        setProject({ ...project, category: {
-            id: e.target.value,
-            name: e.target.options[e.target.selectedIndex].text,
-        } })
+        setProject(prevProject => ({
+            ...prevProject,
+            category: {
+                id: e.target.value,
+                name: e.target.options[e.target.selectedIndex].text,
+            }
+        }));
     }
 
     return (
