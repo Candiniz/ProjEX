@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getDatabase, ref, onValue, update, remove } from 'firebase/database';
+import { getDatabase, ref, onValue, update, remove, readData, get } from 'firebase/database';
+import { useAuth } from "../../firebase/auth/AuthContext";
+
 import { formatToBrazilianCurrency } from './Projects'
 
 import styles from './Project.module.css';
+import { motion } from "framer-motion";
 
 import Cog from '../layout/Cog';
 import Loading from '../layout/Loading';
@@ -15,30 +18,52 @@ import ServiceCard from '../services/ServiceCard';
 
 function Project() {
   const { id } = useParams();
-  const [project, setProject] = useState(null);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [showServiceForm, setShowServiceForm] = useState(false);
+  const [project, setProject] = useState(null);
   const [services, setServices] = useState([]);
   const [message, setMessage] = useState('');
   const [type, setType] = useState('success');
-  const navigate = useNavigate();
+  
+  const userName = user ? user.name : ''; // Pegue o nome do usuário do localStorage ou de um contexto
 
   // Carregar os dados do projeto a partir do Firebase
   useEffect(() => {
-    const db = getDatabase();
-    const projectRef = ref(db, `projects/${id}`);
+    if (!user) {  // Verifica se o usuário não está logado
+        console.error("Usuário não está logado.");
+        navigate("/login");
+        return;
+    }
 
-    onValue(projectRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setProject(data);
-        setServices(data.services || []);
-      } else {
-        setMessage('Projeto não encontrado.');
-        setType('error');
-      }
-    });
-  }, [id]);
+    const projectPath = `users/${user.uid}/projects/${id}`;  // Agora pegamos o uid do usuário logado
+    console.log("Caminho para o projeto:", projectPath);
+
+    const db = getDatabase();  // Obtém a instância do Firebase Realtime Database
+    const dbRef = ref(db, projectPath);  // Cria a referência para o caminho do projeto
+
+    get(dbRef)  // Usa a função get() para ler os dados do Firebase
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log("Dados do projeto:", snapshot.val());
+                setProject(snapshot.val());
+                setServices(snapshot.val().services || []);
+            } else {
+                setMessage('Projeto não encontrado.');
+                setType('error');
+            }
+        })
+        .catch((error) => {
+            console.error("Erro ao buscar projeto:", error);
+            setMessage('Erro ao buscar o projeto');
+            setType('error');
+        });
+  }, [id, navigate, user]);  // Agora dependemos do `user`
+
+  // Restante do código para editar, remover e exibir serviços...
+  // (não precisa mudar o restante do código)
 
   // Editar o projeto
   function editPost(updatedProject) {
@@ -49,7 +74,7 @@ function Project() {
     }
 
     const db = getDatabase();
-    const projectRef = ref(db, `projects/${updatedProject.id}`);
+    const projectRef = ref(db, `users/${user.uid}/projects/${updatedProject.id}`);
 
     update(projectRef, updatedProject)
       .then(() => {
@@ -63,7 +88,6 @@ function Project() {
         setType('error');
       });
   }
-
 
   function parseMonetary(value) {
     if (value === undefined || value === null || value === '') return 0; // Caso o valor esteja vazio ou inválido, retorna 0
@@ -85,7 +109,6 @@ function Project() {
 
     return numericValue;
 }
-
 
   function formatMonetary(value) {
     // Certifica-se de que é um número e formata com duas casas decimais
@@ -118,7 +141,7 @@ function Project() {
 
     // Atualiza no Firebase
     const db = getDatabase();
-    const projectRef = ref(db, `projects/${updatedProject.id}`);
+    const projectRef = ref(db, `users/${user.uid}/projects/${updatedProject.id}`);
 
     update(projectRef, updatedProject)
       .then(() => {
@@ -133,9 +156,6 @@ function Project() {
       });
   }
 
-
-
-
   function removeService(id, cost) {
     const updatedServices = project.services.filter((service) => service.id !== id);
 
@@ -148,7 +168,7 @@ function Project() {
     );
 
     const db = getDatabase();
-    const projectRef = ref(db, `projects/${updatedProject.id}`);
+    const projectRef = ref(db, `users/${user.uid}/projects/${updatedProject.id}`);
 
     update(projectRef, updatedProject)
       .then(() => {
@@ -169,7 +189,7 @@ function Project() {
 
     if (confirmDelete) {
       const db = getDatabase();
-      const projectRef = ref(db, `projects/${project.id}`);
+      const projectRef = ref(db, `users/${user.uid}/projects/${project.id}`);
 
       remove(projectRef)
         .then(() => {
@@ -198,10 +218,17 @@ function Project() {
       {project ? (
         <div className={styles.project_details}>
           {message && <Message type={type} msg={message} />}
-          <div className={styles.details_container}>
+
+          {/* Detalhes do Projeto */}
+          <motion.div
+            className={styles.details_container}
+            initial={{ x: "-100%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 50, damping: 15 }}
+          >
             <h1>Projeto: {project.name}</h1>
             <button className={styles.btn} onClick={toggleProjectForm}>
-              {!showProjectForm ? 'Editar projeto' : 'Fechar'}
+              {!showProjectForm ? "Editar projeto" : "Fechar"}
             </button>
             {!showProjectForm ? (
               <div className={styles.project_info}>
@@ -212,9 +239,11 @@ function Project() {
                   <span>Total do orçamento:</span> R${formatToBrazilianCurrency(project.budget)}
                 </p>
                 <p>
-                  <span>Total utilizado:</span> R${formatToBrazilianCurrency(project.cost || " 0")}
+                  <span>Total utilizado:</span> R${formatToBrazilianCurrency(project.cost || "0")}
                 </p>
-                <button className={styles.btn} onClick={removeProject}>Excluir Projeto</button>
+                <button className={styles.btn} onClick={removeProject}>
+                  Excluir Projeto
+                </button>
               </div>
             ) : (
               <div className={styles.project_info}>
@@ -225,11 +254,18 @@ function Project() {
                 />
               </div>
             )}
-          </div>
-          <div className={styles.service_form_container}>
+          </motion.div>
+
+          {/* Formulário de Serviço */}
+          <motion.div
+            className={styles.service_form_container}
+            initial={{ x: "100%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 50, damping: 15 }}
+          >
             <h2>Adicione um serviço:</h2>
             <button className={styles.btn} onClick={toggleServiceForm}>
-              {!showServiceForm ? 'Adicionar Serviço' : 'Fechar'}
+              {!showServiceForm ? "Adicionar Serviço" : "Fechar"}
             </button>
             <div className={styles.project_info}>
               {showServiceForm && (
@@ -240,19 +276,32 @@ function Project() {
                 />
               )}
             </div>
-          </div>
+          </motion.div>
+
+          {/* Lista de Serviços */}
           <h2>Serviços:</h2>
           <Container customClass="start">
             {services.length > 0 &&
-              services.map((service) => (
-                <ServiceCard
-                  id={service.id}
-                  name={service.name}
-                  cost={formatToBrazilianCurrency(service.cost)}
-                  description={service.description}
+              services.map((service, index) => (
+                <motion.div
                   key={service.id}
-                  handleRemove={removeService}
-                />
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 80,
+                    damping: 20,
+                    delay: index * 0.2, // Animação sequencial
+                  }}
+                >
+                  <ServiceCard
+                    id={service.id}
+                    name={service.name}
+                    cost={formatToBrazilianCurrency(service.cost)}
+                    description={service.description}
+                    handleRemove={removeService}
+                  />
+                </motion.div>
               ))}
             {services.length === 0 && <p>Não há serviços cadastrados.</p>}
           </Container>

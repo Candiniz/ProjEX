@@ -1,0 +1,21 @@
+.empresa_container {
+    padding: 2em;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+  
+  .empresa_container h1 {
+    background-color: #222;
+    color: #ffbb33;
+    padding: 0.4em;
+    margin-bottom: 1em;
+  }
+  
+  .empresa_container p {
+    margin-bottom: 1.5em;
+    line-height: 1.6;
+    font-size: 1.2em;
+  }
+  

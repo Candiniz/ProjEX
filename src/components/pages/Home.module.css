@@ -97,10 +97,14 @@
     white-space: nowrap;
     color: #ffffff;
     position: absolute;
-    bottom: 160px;
+    bottom: 130px;
     right: 50%;
     transform: translateX(50%);
     font-size: small;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -110,6 +114,8 @@
         bottom: calc(510px - 5vw);
         right: calc(10px + 5vw);
         transform: translateX(0);
+
+        align-items: end;
     }
 }
 

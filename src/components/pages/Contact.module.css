@@ -1,0 +1,63 @@
+.contato_container {
+    padding: 2em;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+  
+  .contato_container h1 {
+    background-color: #222;
+    color: #ffbb33;
+    padding: 0.4em;
+    margin-bottom: 1em;
+  }
+  
+  .contato_container p {
+    margin-bottom: 1.5em;
+    font-size: 1.2em;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  
+  .input_group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #ffbb33;
+  }
+  
+  .btn {
+    background-color: #222;
+    color: #fff;
+    padding: 0.8em 1.5em;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn:hover {
+    color: #ffbb33;
+  }
+  

@@ -1,70 +1,75 @@
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { readData, removeData } from "../../firebase/firebase";
+import styles from "./Projects.module.css";
 import Message from "../layout/Message";
 import Loading from "../layout/Loading";
 import LinkButton2 from "../layout/LinkButton2";
 import ProjectCard from "../project/ProjectCard";
-import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-
-// Importando funções auxiliares e o banco de dados
-import { readData, removeData } from "../../firebase/firebase"
-import styles from "./Projects.module.css";
+import { motion } from "framer-motion";
 
 export function formatToBrazilianCurrency(value) {
     if (value !== undefined && value !== null) {
         const numericValue = parseFloat(value);
-        
         if (!isNaN(numericValue)) {
-            return numericValue.toFixed(2).replace('.', ',');
+            return numericValue.toFixed(2).replace(".", ",");
         }
     }
-    
-    return '0,00'; // Retorna um valor padrão caso o valor seja inválido
+    return "0,00"; // Retorna um valor padrão caso o valor seja inválido
 }
 
 function Projects() {
     const [projects, setProjects] = useState([]);
     const [removeLoading, setRemoveLoading] = useState(false);
+    const [message, setMessage] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
 
-    let message = "";
-    if (location.state) {
-        message = location.state.message;
-    }
-
-    // Buscar projetos do Firebase
     useEffect(() => {
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (!user) {
+            console.error("Usuário não está logado.");
+            navigate("/login");
+            return;
+        }
+
         setTimeout(() => {
-            readData("projects")
+            // Agora, a URL usa o nome do usuário
+            readData(`users/${user.uid}/projects`)
                 .then((data) => {
-                    setProjects(Object.values(data)); // Converte o objeto em um array
-                    setRemoveLoading(true);
+                    setProjects(Object.values(data || {}));
                 })
                 .catch((error) => {
                     console.error("Erro ao buscar projetos:", error);
+                })
+                .finally(() => {
                     setRemoveLoading(true);
                 });
         }, 300);
-    }, []);
+
+        if (location.state?.message) {
+            setMessage(location.state.message);
+            navigate(location.pathname, { replace: true });
+        }
+    }, [location.state, location.pathname, navigate]);
 
     function removeProject(id) {
-        
-        console.log('ID do projeto:', id);
         const confirmDelete = window.confirm("Tem certeza que deseja excluir este projeto?");
-    
         if (confirmDelete) {
-            // Exclui o projeto no Firebase
-            removeData(`projects/${id}`)
+            const auth = getAuth();
+            const user = auth.currentUser;
+
+            if (!user) {
+                console.error("Usuário não autenticado.");
+                return;
+            }
+
+            removeData(`users/${user.uid}/projects/${id}`)
                 .then(() => {
-                    console.log("Projeto excluído com sucesso!");
-    
-                    // Atualiza o estado local
-                    setProjects(prevProjects => prevProjects.filter((project) => project.id !== id));
-                    
-                    // Atualiza removeLoading para forçar re-renderização
-                    setRemoveLoading(true);
-    
-                    // Redireciona com a mensagem de sucesso
+                    setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id));
                     navigate("/projects", {
                         state: { message: "Projeto excluído com sucesso!" },
                     });
@@ -72,8 +77,6 @@ function Projects() {
                 .catch((error) => {
                     console.error("Erro ao excluir o projeto:", error);
                 });
-        } else {
-            console.log("Exclusão do projeto cancelada");
         }
     }
 
@@ -88,15 +91,26 @@ function Projects() {
 
             <div className={styles.projectsDiv}>
                 {projects.length > 0 &&
-                    projects.map((project) => (
-                        <ProjectCard
-                            id={project.id}
-                            name={project.name}
-                            budget={formatToBrazilianCurrency(project.budget)}
-                            category={project.category?.name || "Categoria desconhecida"}
+                    projects.map((project, index) => (
+                        <motion.div
                             key={project.id}
-                            handleRemove={removeProject}
-                        />
+                            initial={{ scale: 0.7, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 100,
+                                damping: 14,
+                                delay: index * 0.2,
+                            }}
+                        >
+                            <ProjectCard
+                                id={project.id}
+                                name={project.name}
+                                budget={formatToBrazilianCurrency(project.budget)}
+                                category={project.category?.name || "Categoria desconhecida"}
+                                handleRemove={removeProject}
+                            />
+                        </motion.div>
                     ))}
                 {!removeLoading && <Loading />}
                 {removeLoading && projects.length === 0 && (

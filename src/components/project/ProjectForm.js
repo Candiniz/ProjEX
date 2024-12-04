@@ -5,6 +5,7 @@ import InputMoney from '../form/InputMoney'
 import Select from '../form/Select';
 import SubmitButton from '../form/SubmitButton';
 import styles from './ProjectForm.module.css';
+import { motion } from "framer-motion";
 
 import { readData } from "../../firebase/firebase";
 
@@ -52,31 +53,77 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
 
     return (
         <form onSubmit={submit} className={styles.form}>
-            <Input 
-                type="text" 
-                text="Nome do Projeto" 
-                name="name" 
-                placeholder="Insira o nome do projeto" 
-                handleOnChange={handleChange}
-                value={project.name || ''} 
-            />
-            <InputMoney 
-                type="number" 
-                text="Orçamento do Projeto" 
-                name="budget" 
-                placeholder="Insira o orçamento total" 
-                handleOnChange={handleChange} 
-                value={project.budget || ''} 
-            />
-            <Select 
-                handleOnChange={handleCategory} 
-                name="category_id" 
-                text="Selecione a categoria" 
-                options={categories} 
-                value={project.category ? project.category.id : ''}
-            />
-            <SubmitButton text={btnText} />
-        </form>
+      {/* Nome do Projeto */}
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 80, damping: 20 }}
+      >
+        <Input
+          type="text"
+          text="Nome do Projeto"
+          name="name"
+          placeholder="Insira o nome do projeto"
+          handleOnChange={handleChange}
+          value={project.name || ""}
+        />
+      </motion.div>
+
+      {/* Orçamento do Projeto */}
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 80,
+          damping: 20,
+          delay: 0.1, // Animação sequencial
+        }}
+      >
+        <InputMoney
+          type="number"
+          text="Orçamento do Projeto"
+          name="budget"
+          placeholder="Insira o orçamento total"
+          handleOnChange={handleChange}
+          value={project.budget || ""}
+        />
+      </motion.div>
+
+      {/* Categoria */}
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 80,
+          damping: 20,
+          delay: 0.3, // Animação sequencial
+        }}
+      >
+        <Select
+          handleOnChange={handleCategory}
+          name="category_id"
+          text="Selecione a categoria"
+          options={categories}
+          value={project.category ? project.category.id : ""}
+        />
+      </motion.div>
+
+      {/* Botão de Submissão */}
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 80,
+          damping: 20,
+          delay: 0.5, // Animação sequencial
+        }}
+      >
+        <SubmitButton text={btnText} />
+      </motion.div>
+    </form>
     );
 }
 

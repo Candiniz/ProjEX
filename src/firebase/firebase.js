@@ -1,6 +1,8 @@
 // src/firebase/firebase.js
 
 import { initializeApp } from 'firebase/app';
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 import { getDatabase, ref, set, get, child, remove } from 'firebase/database';
 
 // Configuração do Firebase - use as credenciais que você já copiou
@@ -37,19 +39,19 @@ const writeData = (path, data) => {
 
 
 const readData = (path) => {
-  const dbRef = ref(database); // Cria a referência ao banco de dados
-  return get(child(dbRef, path)) // Retorna a Promise
-      .then((snapshot) => {
-          if (snapshot.exists()) {
-              return snapshot.val(); // Retorna os dados lidos
-          } else {
-              throw new Error("Dados não encontrados!");
-          }
-      })
-      .catch((error) => {
-          console.error("Erro ao ler dados:", error);
-          throw error; // Propaga o erro para quem chamou
-      });
+    const dbRef = ref(database);
+    return get(child(dbRef, path))  // Obtém os dados do Firebase usando o caminho
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                return snapshot.val();  // Retorna os dados se existirem
+            } else {
+                throw new Error("Projeto não encontrado!");  // Caso o projeto não exista
+            }
+        })
+        .catch((error) => {
+            console.error("Erro ao ler dados:", error);
+            throw error;  // Propaga o erro
+        });
 };
 
 const removeData = (path) => {
@@ -64,4 +66,12 @@ const removeData = (path) => {
       });
 };
 
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+export { auth, db };
+
 export { writeData, readData, database, remove, removeData, ref };
+
+export default app
