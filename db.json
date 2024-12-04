@@ -2,43 +2,21 @@
   "projects": [
     {
       "id": "201a",
-      "name": "anderson fafaf",
-      "budget": "123123",
+      "name": "Projeto Teste",
+      "budget": "10000",
       "category": {
         "id": "1",
         "name": "Infra"
       },
-      "cost": 13515,
+      "cost": 1000,
       "services": [
         {
-          "name": "1415135",
-          "cost": "13515",
-          "description": "15tagsg",
+          "name": "Serviço Teste",
+          "cost": "1000",
+          "description": "Descrição Teste",
           "id": "de34f451-4863-4c2c-941e-f9d6e9177fdd"
         }
       ]
-    },
-    {
-      "id": "4b20",
-      "name": "134151",
-      "budget": "135151",
-      "category": {
-        "id": "2",
-        "name": "Desenvolvimento"
-      },
-      "cost": 0,
-      "services": []
-    },
-    {
-      "id": "8a5a",
-      "name": "135135",
-      "budget": "13515151",
-      "category": {
-        "id": "2",
-        "name": "Desenvolvimento"
-      },
-      "cost": 0,
-      "services": []
     }
   ],
   "categories": [

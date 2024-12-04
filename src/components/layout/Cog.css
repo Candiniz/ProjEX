@@ -1,14 +1,15 @@
 .background-cog {
     position: fixed; /* Fixa o ícone na tela */
-    bottom: -200px;
+    bottom: -300px;
     right: -100px;
-    width: 60vw; /* Ocupa 40% da largura da tela */
-    height: 100vh; /* Ocupa a altura total da tela */
+    width: 60%; /* Ocupa 40% da largura da tela */
+    height: 150%; /* Ocupa a altura total da tela */
     display: flex;
     justify-content: center; /* Centraliza o ícone horizontalmente */
     align-items: center; /* Centraliza o ícone verticalmente */
     z-index: 0; /* Coloca atrás do conteúdo */
-    overflow: visible;
+    overflow: hidden;
+    pointer-events: none; 
 }
 
 .cog-icon {
