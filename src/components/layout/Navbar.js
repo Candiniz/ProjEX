@@ -130,7 +130,7 @@ function Navbar() {
                   </Link>
                 </li>
                 <li className={styles.itemMenu}>
-                  <button className={styles.itemMenuBtn} onClick={handleLogout}><IoExitSharp /><span>Sair</span></button>
+                  <button className={styles.itemMenuBtn} onClick={() => { handleLogout(); toggleMenu() }}><IoExitSharp /><span>Sair</span></button>
                 </li>
               </>
             )}

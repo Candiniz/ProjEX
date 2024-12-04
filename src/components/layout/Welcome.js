@@ -19,6 +19,9 @@ function WelcomeMessage() {
             }).catch((error) => {
                 console.error("Erro ao buscar nome do usuário:", error);
             });
+        } else {
+            // Caso o usuário esteja deslogado, limpa o nome
+            setUserName('');
         }
     }, [user]); // Sempre que o usuário mudar (logar ou sair)
 
@@ -27,7 +30,7 @@ function WelcomeMessage() {
             {userName ? (
                 <h1>Bem-vindo de volta, {userName}!</h1>
             ) : (
-                <h1>Bem vindo!</h1>
+                <h1>Bem-vindo!</h1>
             )}
         </div>
     );

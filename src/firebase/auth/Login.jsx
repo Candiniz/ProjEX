@@ -25,7 +25,7 @@ function Login() {
       const user = userCredential.user;
       console.log("Usuário logado:", user);
 
-      setMessage("Login realizado com sucesso!");
+      setMessage("Login realizado com sucesso! Você será redirecionado para a Home!");
       setMessageType("success");
       setTimeout(() => navigate("/"), 3000); // Redireciona após 3 segundos
     } catch (err) {

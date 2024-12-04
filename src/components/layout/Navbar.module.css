@@ -113,7 +113,7 @@
 .itemMenu {
     display: flex;
     align-items: center; /* Alinha verticalmente os itens */
-    
+    text-align: end;
     margin: 0.7em 0;
     font-size: 1.5em;
     width: fit-content;
