@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import styles from './Register.module.css'
 
 function Register() {
+
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -40,7 +42,7 @@ function Register() {
                 uid: user.uid,
                 projects: {} // Criando a chave de projects vazia para futuros projetos
             });
-
+            navigate("/")
             console.log("Usuário registrado com sucesso!", user);
         } catch (error) {
             console.error("Erro ao registrar o usuário:", error.message);
