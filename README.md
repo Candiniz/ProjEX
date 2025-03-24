@@ -1,5 +1,11 @@
 # projEx
 
+<p align="center">
+  <img src="https://media2.giphy.com/media/eNAsjO55tPbgaor7ma/giphy.gif?cid=6c09b9526zav4uykhu5rebxit3k84hosqpoh5plxwbcetc7z&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=s" width="70" style="vertical-align: middle; display: inline-block;">
+  <img src="https://i.imgur.com/Nta63YH.gif" width="100" style="vertical-align: bottom; display: inline-block;">
+  <img src="https://media2.giphy.com/media/ln7z2eWriiQAllfVcn/giphy.gif?cid=6c09b9523j00k4nr489c9yszsue2ckfmt4xqxdncj6zno00d&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=s" width="80" style="vertical-align: middle; display: inline-block;">
+</p>
+
 projEx foi desenvolvido com o objetivo de **dominar operações básicas em JavaScript**, como manipulação de valores numéricos e monetários, além de administrar valores dinâmicos e a conexão entre frontend e backend.
 
 Inicialmente, a aplicação utilizava um **JSON Server** para armazenar e recuperar dados. No entanto, ao perceber suas limitações, migrei para o **Firebase**, garantindo **mais escalabilidade e desempenho**.
