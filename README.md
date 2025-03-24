@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# projEx
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+projEx foi desenvolvido com o objetivo de **dominar operações básicas em JavaScript**, como manipulação de valores numéricos e monetários, além de administrar valores dinâmicos e a conexão entre frontend e backend.
 
-## Available Scripts
+Inicialmente, a aplicação utilizava um **JSON Server** para armazenar e recuperar dados. No entanto, ao perceber suas limitações, migrei para o **Firebase**, garantindo **mais escalabilidade e desempenho**.
 
-In the project directory, you can run:
+## 🚀 Tecnologias Utilizadas
 
-### `npm start`
+- **JavaScript (ES6+)** - Manipulação de dados dinâmicos
+- **Firebase** - Banco de dados, autenticação e armazenamento
+- **HTML5 e CSS3** - Estrutura e estilização da interface
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🔑 Funcionalidades
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Sistema de Login Seguro**
+  - Autenticação por email e senha via Firebase
+- **Gerenciamento de Projetos**
+  - Criação, edição e exclusão de projetos
+- **Conexão Dinâmica com o Banco de Dados**
+  - Armazenamento e recuperação de informações em tempo real
 
-### `npm test`
+## 📈 Próximos Passos
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+O projEx tem potencial para evoluir para um verdadeiro **Software as a Service (SaaS)**. Alguns dos recursos planejados incluem:
 
-### `npm run build`
+- 📊 **Modelo de monetização** com planos de assinatura
+- 👥 **Suporte multiusuário** com permissões personalizadas
+- 🎨 **Melhoria na interface do usuário** para maior usabilidade
+- 📊 **Geração de relatórios automáticos** sobre os projetos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📂 Como Rodar o Projeto
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/Candiniz/projEx.git
+   ```
+2. Acesse a pasta do projeto:
+   ```bash
+   cd projEx
+   ```
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+4. Configure as variáveis de ambiente no arquivo `.env`:
+   ```env
+   FIREBASE_API_KEY=your_firebase_api_key
+   FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+   FIREBASE_PROJECT_ID=your_firebase_project_id
+   FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+   FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+   FIREBASE_APP_ID=your_firebase_app_id
+   ```
+5. Execute o projeto:
+   ```bash
+   npm start
+   ```
+6. Acesse **http://localhost:3000** no navegador.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🤝 Contribuição
 
-### `npm run eject`
+Contribuições são bem-vindas! Para isso:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Fork o repositório
+2. Crie uma nova branch:
+   ```bash
+   git checkout -b minha-melhoria
+   ```
+3. Faça suas modificações e commite:
+   ```bash
+   git commit -m "Melhoria: Adicionei nova funcionalidade X"
+   ```
+4. Envie para o repositório remoto:
+   ```bash
+   git push origin minha-melhoria
+   ```
+5. Abra um Pull Request 🚀
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📜 Licença
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Este projeto foi desenvolvido para fins de aprendizado e exploração de tecnologias. Caso tenha interesse em utilizá-lo, entre em contato!
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+🔥 **projEx representa minha jornada no desenvolvimento fullstack**, reforçando conhecimentos em **autenticação, estruturação de dados e escalabilidade**. Obrigado por conferir este projeto! 😊
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
